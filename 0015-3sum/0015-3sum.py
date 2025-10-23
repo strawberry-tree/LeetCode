@@ -13,6 +13,8 @@ class Solution:
         N = len(nums)
         answer = []
         for i in range(N - 2):
+            if i > 0 and nums[i] == nums[i - 1]:
+                continue
             for j in range(i + 1, N - 1):
                 rest = 0 - (nums[i] + nums[j])
                 
