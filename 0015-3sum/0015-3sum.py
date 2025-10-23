@@ -16,6 +16,8 @@ class Solution:
             if i > 0 and nums[i] == nums[i - 1]:
                 continue
             for j in range(i + 1, N - 1):
+                if j > i + 1 and nums[j] == nums[j - 1]:
+                    continue
                 rest = 0 - (nums[i] + nums[j])
                 
                 if rest in sum_dict and j < sum_dict[rest]:
