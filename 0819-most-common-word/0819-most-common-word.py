@@ -1,19 +1,14 @@
 from collections import Counter
+import re
 
 class Solution:
     def mostCommonWord(self, paragraph: str, banned: List[str]) -> str:
-        for punc in ["!", "?", "'", ",", ";", "."]:
-            paragraph = paragraph.replace(punc, " ")
-        words = [word.lower() for word in paragraph.split()]
-        print(words)
-
-        word_counts = Counter(words)
+        paragraph = re.sub(r'[^a-zA-Z]', ' ', paragraph)
         banned = set(banned)
+        print(paragraph)
 
-        top_words = sorted(list(word_counts.keys()), key = lambda x: word_counts[x], reverse = True)
+        words = [word.lower() for word in paragraph.split() if word.lower() not in banned]
+        word_counts = Counter(words)
 
-        for top_word in top_words:
-            if top_word not in banned:
-                return top_word
-
+        return word_counts.most_common(1)[0][0]
         
