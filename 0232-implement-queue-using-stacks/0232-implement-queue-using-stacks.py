@@ -9,18 +9,16 @@ class MyQueue:
         
 
     def pop(self) -> int:
-        if self.s2:
-            return self.s2.pop()
-        while self.s1:
-            self.s2.append(self.s1.pop())
+        if not self.s2:
+            while self.s1:
+                self.s2.append(self.s1.pop())
         return self.s2.pop()
         
 
     def peek(self) -> int:
-        if self.s2:
-            return self.s2[-1]
-        while self.s1:
-            self.s2.append(self.s1.pop())
+        if not self.s2:
+            while self.s1:
+                self.s2.append(self.s1.pop())
         return self.s2[-1]
         
 
