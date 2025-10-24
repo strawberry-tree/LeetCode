@@ -4,13 +4,24 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+from collections import deque
+
 class Solution:
     def maxDepth(self, root: Optional[TreeNode]) -> int:
-        def dfs(node, depth):
-            if not node:
-                return depth
-            left_depth = dfs(node.left, depth + 1)
-            right_depth = dfs(node.right, depth + 1)
-            return max(left_depth, right_depth)
+        if not root:
+            return 0
+        
+        queue = deque([(root, 1)])
+        answer = 1
 
-        return dfs(root, 0)
+        while queue:
+            curr, curr_depth = queue.popleft()
+            answer = max(curr_depth, answer)
+            if curr.left:
+                queue.append((curr.left, curr_depth + 1))
+            if curr.right:
+                queue.append((curr.right, curr_depth + 1))
+
+        return answer
+        
+
