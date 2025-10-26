@@ -30,7 +30,8 @@ class Solution:
             evenCurr.next = evenOut
             evenOut.next = None #!!
 
-        prev.next = evenHead.next
+        if prev:
+            prev.next = evenHead.next
         
         return head
 
