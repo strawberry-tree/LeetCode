@@ -2,7 +2,7 @@ class Node:
     def __init__(self, value):
         self.value = value
         self.end_of_word = False
-        self.children = []
+        self.children = {}
 
 class Trie:
     def __init__(self):
@@ -11,23 +11,19 @@ class Trie:
     def insert(self, word: str) -> None:
         curr = self.root
         for letter in word:
-            for child in curr.children:
-                if child.value == letter:
-                    curr = child
-                    break
+            if letter in curr.children:
+                curr = curr.children[letter]
             else:
                 new_child = Node(letter)
-                curr.children.append(new_child)
-                curr = new_child
+                curr.children[letter] = new_child
+                curr = curr.children[letter]
         curr.end_of_word = True
 
     def search(self, word: str) -> bool:
         curr = self.root
         for letter in word:
-            for child in curr.children:
-                if child.value == letter:
-                    curr = child
-                    break
+            if letter in curr.children:
+                curr = curr.children[letter]
             else:
                 return False
         return curr.end_of_word
@@ -35,10 +31,8 @@ class Trie:
     def startsWith(self, prefix: str) -> bool:
         curr = self.root
         for letter in prefix:
-            for child in curr.children:
-                if child.value == letter:
-                    curr = child
-                    break
+            if letter in curr.children:
+                curr = curr.children[letter]
             else:
                 return False
         return True
