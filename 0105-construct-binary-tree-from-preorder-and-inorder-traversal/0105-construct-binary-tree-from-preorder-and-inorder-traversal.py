@@ -17,8 +17,8 @@ class Solution:
 
         inorder_idx = inorder.index(root)
         
-        left = self.buildTree(preorder, inorder[:inorder_idx])
-        right = self.buildTree(preorder, inorder[inorder_idx + 1:])
+        left = self.buildTree(preorder[idx+1:], inorder[:inorder_idx])
+        right = self.buildTree(preorder[idx+1:], inorder[inorder_idx + 1:])
         
         new_root = TreeNode(val=root)
         new_root.left = left
