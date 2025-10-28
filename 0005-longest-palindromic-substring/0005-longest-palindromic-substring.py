@@ -7,11 +7,8 @@ class Solution:
                 left -= 1
                 right += 1
             return s[left + 1:right]
-
-        if len(s) < 2:
-            return s
             
-        answer = ""
+        answer = s[0]
         for i in range(len(s) - 1):
             answer = max(answer, check(i, i + 1), check(i, i + 2), key=len)
 
